@@ -6,7 +6,7 @@ import org.food.donation.model.NGO;
 import java.util.*;
 
 public class NGODaoImpl implements NGODao {
-    private Map<String, NGO> ngos = new HashMap<>(Map.of("texasHelp", new NGO(1, "12345", "Texas Help Center", "Texas", "texasHelp", "pass123" )));
+    private Map<String, NGO> ngos = new HashMap<>();
 
     @Override
     public void addNGO(NGO ngo) {
@@ -20,15 +20,15 @@ public class NGODaoImpl implements NGODao {
 
     @Override
     public NGO login(String username, String password) {
-//        for (NGO ngo : ngos.values()) {
-//            if (ngo.getUsername().equals(username) && ngo.getPassword().equals(password)) {
-//                return ngo;
-//            }
-//        }
-//        return null;
+        /*
+         * ngos = {
+         * "THC" : {id=1, name='THC', address='Texas', contact='14528457', username='texasHelp', password='pass123'},
+         * "WCF" : {id=2, name='WCF', address='NewYork', contact='12345678', username='womenCare', password='care123'},
+         * }
+         * */
 
         for (Map.Entry<String, NGO> ngo : ngos.entrySet()) {
-            NGO currentNGO=ngo.getValue();
+            NGO currentNGO = ngo.getValue();
             if (currentNGO.getUsername().equals(username) && currentNGO.getPassword().equals(password)) {
                 return currentNGO;
             }

@@ -15,45 +15,45 @@ import org.food.donation.model.User;
 import java.util.Scanner;
 
 public class FoodDonation {
+
+    private static Scanner scanner = new Scanner(System.in);
+    private static NGODao ngoDAO = new NGODaoImpl();
+    private static DonationDao donationDAO = new DonationDaoImpl();
+
     public static void init() {
 
         // DAO Initialization
         UserDao userDAO = new UserDaoImpl();
-        NGODao ngoDAO = new NGODaoImpl();
-        DonationDao donationDAO = new DonationDaoImpl();
+
         AdminDao adminDAO = new AdminDaoImpl(userDAO, ngoDAO, donationDAO) {
             @Override
             public void addAdmin(NGO ngo) {
             }
         };
         // Sample Data
-        ngoDAO.addNGO(new NGO("12345", "Texas Help Center", "Texas", "texasHelp", "pass123"));
-        ngoDAO.addNGO(new NGO("54321", "Women Care Foundation", "NewYork", "womenCare", "care123"));
+        ngoDAO.addNGO(new NGO(1,"THC", "Texas", "14528457", "texasHelp", "pass123"));
+        ngoDAO.addNGO(new NGO(2,"WCF", "NewYork", "12345678", "womenCare", "care123"));
 
 //        userDAO.addUser(new User("NewYork" , "James", "12345"));
 //        userDAO.addUser(new User("Austin" , "Nancy", "54321"));
-
-        Scanner scanner = new Scanner(System.in);
         System.out.println("\t\t\tWelcome to the Food Donation System!");
         System.out.println("\t\tPlease select the operation You want to perform!");
 
         while (true) {
             System.out.println("1. Admin Login\n2. User Registration\n3. User Login\n4. NGO Login\n5. Exit");
             int choice = scanner.nextInt();
-            scanner.nextLine();
-
             switch (choice) {
                 case 1:
-                    handleAdminLogin(scanner, adminDAO);
+                    handleAdminLogin( adminDAO);
                     break;
                 case 2:
-                    handleUserRegistration(scanner, userDAO);
+                    handleUserRegistration( userDAO);
                     break;
                 case 3:
-                    handleUserLogin(scanner, userDAO, ngoDAO, donationDAO);
+                    handleUserLogin( userDAO, ngoDAO, donationDAO);
                     break;
                 case 4:
-                    handleNGOLogin(scanner, ngoDAO, donationDAO);
+                    handleNGOLogin(donationDAO);
                     break;
                 case 5:
                     System.out.println("Exiting the system. Thank you!");
@@ -64,7 +64,7 @@ public class FoodDonation {
         }
     }
 
-    private static void handleAdminLogin(Scanner scanner, AdminDao adminDAO) {
+    private static void handleAdminLogin(AdminDao adminDAO) {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
@@ -86,7 +86,7 @@ public class FoodDonation {
         }
     }
 
-    private static void handleUserRegistration(Scanner scanner, UserDao userDAO) {
+    private static void handleUserRegistration(UserDao userDAO) {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
         System.out.print("Enter contact number: ");
@@ -98,7 +98,7 @@ public class FoodDonation {
         System.out.println("Redirected to the main menu!");
     }
 
-    private static void handleUserLogin(Scanner scanner, UserDao userDao, NGODao ngoDao, DonationDao donationDao) {
+    private static void handleUserLogin( UserDao userDao, NGODao ngoDao, DonationDao donationDao) {
         System.out.print("Enter your name: ");
         String name = scanner.nextLine();
         System.out.print("Enter your contact no.: ");
@@ -143,13 +143,14 @@ public class FoodDonation {
         }
     }
 
-    private static void handleNGOLogin(Scanner scanner, NGODao ngoDao, DonationDao donationDao) {
+    private static void handleNGOLogin(DonationDao donationDao) {
+        scanner.nextLine();
         System.out.print("Enter NGO username: ");
         String username = scanner.nextLine();
         System.out.print("Enter NGO password: ");
         String password = scanner.nextLine();
 
-        NGO ngo = ngoDao.login(username, password);
+        NGO ngo = ngoDAO.login(username, password);
         if (ngo != null) {
             System.out.println("Welcome, " + ngo.getName() + "!");
             System.out.println("1. View Donations\n2. Logout");

@@ -17,10 +17,6 @@ public class NGO {
         this.password = password;
     }
 
-    public NGO(String number, String texasHelpCenter, String texas, String texasHelp, String pass123) {
-    }
-
-    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -41,7 +37,7 @@ public class NGO {
         return address;
     }
 
-    public void setAddress(int id) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -49,20 +45,23 @@ public class NGO {
         return contact;
     }
 
-    public void setContact(String name) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
+
     public String getUsername() {
-        return this.username;
+        return username;
     }
-    public void setUsername(String name) {
+
+    public void setUsername(String username) {
         this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
-    public void setPassword(String name) {
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -73,7 +72,8 @@ public class NGO {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", contact='" + contact + '\'' +
-                ", username='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
