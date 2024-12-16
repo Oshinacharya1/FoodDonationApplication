@@ -7,7 +7,13 @@ import java.util.*;
 
 public class UserDaoImpl implements UserDao {
     // Map to store users with their name as the key
-    private Map<String, User> users = new HashMap<>();
+    private Map<String, User> users = new HashMap<>(
+            Map.of(
+                    "testuser1", new User("NewYork", "test", "12345", "password"),
+                    "testuser2", new User("Texas", "test2", "123456", "password2")
+
+            )
+    );
 
     @Override
     public void addUser(User user) {
