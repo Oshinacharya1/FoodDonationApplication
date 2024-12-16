@@ -7,11 +7,13 @@ import org.food.donation.model.NGO;
 import java.util.*;
 
 public class NGODaoImpl implements NGODao {
+
     private Map<String, NGO> ngos = new HashMap<>(
     Map.of(
             "NGO1", new NGO(1, "Helping Hand", "Texas", "12345", "username", "password" )
     )
     );
+
 
     @Override
     public void addNGO(NGO ngo) {

@@ -67,7 +67,7 @@ public class FoodDonation {
     }
 
     private static void handleAdminLogin(AdminDao adminDAO) {
-        scanner.nextLine();
+
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");

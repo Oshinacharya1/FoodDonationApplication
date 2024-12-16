@@ -17,9 +17,6 @@ public class NGO {
         this.password = password;
     }
 
-    public NGO() {
-
-    }
 
     public int getId() {
         return id;
